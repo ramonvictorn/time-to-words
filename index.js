@@ -1,4 +1,4 @@
-const digits = {
+const digitsToWord = {
   0: 'zero',
   1: 'one',
   2: 'two',
@@ -14,8 +14,8 @@ const digits = {
   20:'twenty',
 }
 
-function getMinutesWord(minutes) {
-  let minutesWord = digits[minutes];
+function getMinutesInWord(minutes) {
+  let minutesWord = digitsToWord[minutes];
 
   if (minutes == 15 || minutes == 30) {
     minutesWord = minutes == 15 ? 'quarter' : 'half';
@@ -37,11 +37,11 @@ function convertTimeToWords(time) {
   }
 
   if (minutes === 0) {
-    return `${digits[hour]} o\'clock`;
+    return `${digitsToWord[hour]} o\'clock`;
   }
 
   if (minutes <= 30) {
-    words = `${getMinutesWord(minutes)} past ${digits[hour]}`;
+    words = `${getMinutesInWord(minutes)} past ${digitsToWord[hour]}`;
     return words
   }
 
@@ -50,10 +50,10 @@ function convertTimeToWords(time) {
   if (missingMinutes == 15 || missingMinutes == 30) {
     missingMinutes = missingMinutes == 15 ? 'quarter' : 'half';
   }
-  const finalMinutes = typeof missingMinutes === 'string' ? missingMinutes : digits[missingMinutes];
+  const minutesInWord = typeof missingMinutes === 'string' ? missingMinutes : digitsToWord[missingMinutes];
 
   const nextHour = hour + 1;
-  words = `${finalMinutes} to ${digits[nextHour]}`;
+  words = `${minutesInWord} to ${digitsToWord[nextHour]}`;
 
   return words;
 }
